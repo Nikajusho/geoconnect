@@ -71,8 +71,16 @@
             transform: translate(-50%, -50%);
             z-index: 0;
         }
-        .satellite-track.outer { width: 800px; height: 800px; animation: spin 60s linear infinite; }
-        .satellite-track.inner { width: 500px; height: 500px; animation: spin 40s linear infinite reverse; }
+        .satellite-track.outer { 
+            width: 80vw; height: 80vw; 
+            max-width: 800px; max-height: 800px;
+            animation: spin 60s linear infinite; 
+        }
+        .satellite-track.inner { 
+            width: 50vw; height: 50vw; 
+            max-width: 500px; max-height: 500px;
+            animation: spin 40s linear infinite reverse; 
+        }
         
         .satellite {
             position: absolute;
@@ -89,7 +97,8 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px; height: 600px;
+            width: 80vw; height: 80vw;
+            max-width: 600px; max-height: 600px;
             border-radius: 50%;
             border: 1px solid rgba(255,255,255,0.05);
             background: conic-gradient(from 0deg, transparent 0%, rgba(6,182,212,0.1) 10%, transparent 50%);
@@ -126,7 +135,8 @@
         /* --- FIREWORKS ANIMATION (FOOTER) --- */
         .firework {
             position: absolute;
-            top: 50%; left: 50%;
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
             width: 0.5rem;
             aspect-ratio: 1;
@@ -170,26 +180,27 @@
         .layer-text.active { opacity: 1; transform: translateX(0); position: relative; }
         
         /* Flip Card */
-        .flip-card { perspective: 1000px; }
+        .flip-card { perspective: 1000px; height: 300px; }
         .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: left; transition: transform 0.6s; transform-style: preserve-3d; }
         .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
-        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 2rem; }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; justify-content: center; }
         .flip-card-back { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); transform: rotateY(180deg); border: 1px solid var(--neon-cyan); }
     </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 
     <!-- Global Background -->
-    <div class="orb bg-cyan-600 w-[500px] h-[500px] top-[-100px] left-[-100px]"></div>
-    <div class="orb bg-blue-700 w-[400px] h-[400px] bottom-0 right-0 animation-delay-2000"></div>
+    <div class="orb bg-cyan-600 w-[300px] md:w-[500px] h-[300px] md:h-[500px] top-[-50px] md:top-[-100px] left-[-50px] md:left-[-100px]"></div>
+    <div class="orb bg-blue-700 w-[200px] md:w-[400px] h-[200px] md:h-[400px] bottom-0 right-0 animation-delay-2000"></div>
 
-    <nav class="fixed w-full z-50 top-0 left-0 px-4 py-6">
-        <div class="max-w-6xl mx-auto glass-card rounded-full px-8 py-4 flex justify-between items-center relative z-50">
-            <div class="flex items-center gap-3">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 left-0 px-4 py-4 md:py-6 hidden md:block">
+        <div class="max-w-6xl mx-auto glass-card rounded-full px-4 md:px-8 py-3 md:py-4 flex justify-between items-center relative z-50">
+            <div class="flex items-center gap-2 md:gap-3">
                 <div class="w-8 h-8 rounded bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center font-bold text-black font-tech">G</div>
-                <span class="font-tech font-bold text-lg tracking-wide">GeoConnect</span>
+                <span class="font-tech font-bold text-base md:text-lg tracking-wide">GeoConnect</span>
             </div>
-            <div class="hidden md:flex items-center gap-6 text-xs font-bold uppercase tracking-widest text-slate-400">
+            <div class="flex items-center gap-4 md:gap-6 text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-400 overflow-x-auto whitespace-nowrap scrollbar-hide px-2 md:px-0">
                 <a href="#market" class="hover:text-cyan-400 transition-colors">Market</a>
                 <a href="#competitors" class="hover:text-cyan-400 transition-colors">Competition</a>
                 <a href="#strategy" class="hover:text-cyan-400 transition-colors">Strategy</a>
@@ -201,9 +212,8 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION: Satellites -->
-    <section class="min-h-screen flex items-center justify-center px-6 relative pt-20 overflow-hidden">
-        <!-- SATELLITE ANIMATION -->
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex items-center justify-center px-4 md:px-6 relative pt-20 overflow-hidden">
         <div class="satellite-track outer">
             <div class="satellite"><i data-lucide="satellite" class="w-6 h-6 rotate-45"></i></div>
         </div>
@@ -211,67 +221,90 @@
             <div class="satellite"><i data-lucide="radio" class="w-6 h-6 -rotate-12"></i></div>
         </div>
         
-        <div class="text-center max-w-5xl mx-auto relative z-10">
-            <div class="inline-block mb-6 px-4 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-xs font-bold tracking-widest uppercase animate__animated animate__fadeInDown">
+        <div class="text-center max-w-5xl mx-auto relative z-10 w-full">
+            <div class="inline-block mb-6 px-4 py-1 rounded-full border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 text-[10px] md:text-xs font-bold tracking-widest uppercase animate__animated animate__fadeInDown">
                 Management Consulting Project
             </div>
-            <h1 class="text-6xl md:text-8xl font-bold leading-tight mb-8 animate__animated animate__fadeInUp">
+            <h1 class="text-4xl md:text-6xl lg:text-8xl font-bold leading-tight mb-6 md:mb-8 animate__animated animate__fadeInUp">
                 Restoring <br>
                 <span class="text-gradient">Market Position</span>
             </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto mb-12 animate__animated animate__fadeInUp animate__delay-1s">
+            <p class="text-base md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 md:mb-12 animate__animated animate__fadeInUp animate__delay-1s px-4">
                 A strategic analysis and repositioning plan for GeoConnect in the Georgian telecommunications market.
             </p>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 animate__animated animate__fadeInUp animate__delay-1s">
-                <div class="glass-card p-4 rounded-xl hover-glow cursor-default">
-                    <p class="font-tech font-bold text-sm">Nino Mchedlishvili</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 animate__animated animate__fadeInUp animate__delay-1s px-2 md:px-0">
+                <div class="glass-card p-3 md:p-4 rounded-xl hover-glow cursor-default">
+                    <p class="font-tech font-bold text-xs md:text-sm">Nino Mchedlishvili</p>
                 </div>
-                <div class="glass-card p-4 rounded-xl hover-glow cursor-default">
-                    <p class="font-tech font-bold text-sm">Saba Kokhtashvili</p>
+                <div class="glass-card p-3 md:p-4 rounded-xl hover-glow cursor-default">
+                    <p class="font-tech font-bold text-xs md:text-sm">Saba Kokhtashvili</p>
                 </div>
-                <div class="glass-card p-4 rounded-xl hover-glow cursor-default">
-                    <p class="font-tech font-bold text-sm">Elene Katamadze</p>
+                <div class="glass-card p-3 md:p-4 rounded-xl hover-glow cursor-default">
+                    <p class="font-tech font-bold text-xs md:text-sm">Elene Katamadze</p>
                 </div>
-                <div class="glass-card p-4 rounded-xl hover-glow cursor-default">
-                    <p class="font-tech font-bold text-sm">Nika Jushoshvili</p>
+                <div class="glass-card p-3 md:p-4 rounded-xl hover-glow cursor-default">
+                    <p class="font-tech font-bold text-xs md:text-sm">Nika Jushoshvili</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 1. Market Analysis: Radar Scan -->
-    <section id="market" class="py-24 px-6 relative overflow-hidden">
+    <!-- 1. Market Analysis -->
+    <section id="market" class="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">
         <div class="radar-scan"></div>
         <div class="max-w-7xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-center">1. Market <span class="text-gradient">Diagnostics</span></h2>
+            <h2 class="text-3xl md:text-5xl font-bold mb-10 md:mb-16 text-center">1. Market <span class="text-gradient">Diagnostics</span></h2>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Porter's 5 Forces -->
-                <div class="glass-card p-8 rounded-3xl hover-glow group">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Porter's 5 Forces - UPDATED WITH ALL 5 -->
+                <div class="glass-card p-6 md:p-8 rounded-3xl hover-glow group">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-3 rounded-lg bg-cyan-500/10 text-cyan-400"><i data-lucide="activity"></i></div>
-                        <h3 class="text-2xl font-bold font-tech">Porter's 5 Forces</h3>
+                        <h3 class="text-xl md:text-2xl font-bold font-tech">Porter's 5 Forces</h3>
                     </div>
                     <div class="space-y-4">
+                        <!-- 1. Customer Power -->
                         <div class="p-4 bg-white/5 rounded-xl border border-white/5">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-white font-bold">Customer Power</span>
-                                <span class="text-red-400 text-xs font-bold bg-red-900/30 px-2 py-1 rounded">HIGH</span>
+                            <div class="flex justify-between mb-1 items-center">
+                                <span class="text-white font-bold text-sm md:text-base">Customer Power</span>
+                                <span class="text-red-400 text-[10px] md:text-xs font-bold bg-red-900/30 px-2 py-1 rounded">HIGH</span>
                             </div>
                             <p class="text-xs text-slate-400">28% leave yearly. Low switching costs. Discounts drive churn.</p>
                         </div>
+                        
+                        <!-- 2. Supplier Power (ADDED) -->
                         <div class="p-4 bg-white/5 rounded-xl border border-white/5">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-white font-bold">Threat of Entrants</span>
-                                <span class="text-green-400 text-xs font-bold bg-green-900/30 px-2 py-1 rounded">LOW</span>
+                            <div class="flex justify-between mb-1 items-center">
+                                <span class="text-white font-bold text-sm md:text-base">Supplier Power</span>
+                                <span class="text-yellow-400 text-[10px] md:text-xs font-bold bg-yellow-900/30 px-2 py-1 rounded">MED</span>
+                            </div>
+                            <p class="text-xs text-slate-400">Long-term contracts. High complexity to change vendors.</p>
+                        </div>
+
+                        <!-- 3. Threat of Entrants -->
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                            <div class="flex justify-between mb-1 items-center">
+                                <span class="text-white font-bold text-sm md:text-base">Threat of Entrants</span>
+                                <span class="text-green-400 text-[10px] md:text-xs font-bold bg-green-900/30 px-2 py-1 rounded">LOW</span>
                             </div>
                             <p class="text-xs text-slate-400">High regulatory barriers & capital requirements protect the market.</p>
                         </div>
+
+                        <!-- 4. Threat of Substitutes (ADDED) -->
                         <div class="p-4 bg-white/5 rounded-xl border border-white/5">
-                            <div class="flex justify-between mb-1">
-                                <span class="text-white font-bold">Competitive Rivalry</span>
-                                <span class="text-red-400 text-xs font-bold bg-red-900/30 px-2 py-1 rounded">HIGH</span>
+                            <div class="flex justify-between mb-1 items-center">
+                                <span class="text-white font-bold text-sm md:text-base">Threat of Substitutes</span>
+                                <span class="text-green-400 text-[10px] md:text-xs font-bold bg-green-900/30 px-2 py-1 rounded">LOW</span>
+                            </div>
+                            <p class="text-xs text-slate-400">No replaceable product currently. Internet-focused products are a future risk.</p>
+                        </div>
+
+                        <!-- 5. Competitive Rivalry -->
+                        <div class="p-4 bg-white/5 rounded-xl border border-white/5">
+                            <div class="flex justify-between mb-1 items-center">
+                                <span class="text-white font-bold text-sm md:text-base">Competitive Rivalry</span>
+                                <span class="text-red-400 text-[10px] md:text-xs font-bold bg-red-900/30 px-2 py-1 rounded">HIGH</span>
                             </div>
                             <p class="text-xs text-slate-400">Magti and Silknet dominate. Price wars are eroding ARPU (-12%).</p>
                         </div>
@@ -279,12 +312,12 @@
                 </div>
 
                 <!-- SWOT Analysis -->
-                <div class="glass-card p-8 rounded-3xl hover-glow">
+                <div class="glass-card p-6 md:p-8 rounded-3xl hover-glow">
                     <div class="flex items-center gap-3 mb-6">
                         <div class="p-3 rounded-lg bg-violet-500/10 text-violet-400"><i data-lucide="pie-chart"></i></div>
-                        <h3 class="text-2xl font-bold font-tech">SWOT Analysis</h3>
+                        <h3 class="text-xl md:text-2xl font-bold font-tech">SWOT Analysis</h3>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 h-[80%]">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 h-auto md:h-[80%]">
                         <div class="p-4 rounded-xl border-l-2 border-green-500 bg-green-500/5">
                             <h4 class="text-xs font-bold text-green-400 uppercase mb-2">Strengths</h4>
                             <p class="text-xs text-slate-300">• Big variety of services<br>• Nationwide infrastructure</p>
@@ -307,19 +340,19 @@
         </div>
     </section>
 
-    <!-- 2. Competitors: Signal Waves -->
-    <section id="competitors" class="py-24 px-6 bg-slate-950/50 relative overflow-hidden">
+    <!-- 2. Competitors -->
+    <section id="competitors" class="py-16 md:py-24 px-4 md:px-6 bg-slate-950/50 relative overflow-hidden">
         <div class="max-w-7xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">2. Competitive <span class="text-gradient">Landscape</span></h2>
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-10 md:mb-16">2. Competitive <span class="text-gradient">Landscape</span></h2>
             
-            <div class="grid md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 <!-- Magti -->
-                <div class="glass-card p-10 rounded-[2rem] relative overflow-hidden group">
-                    <div class="signal-wave red w-96 h-96 absolute -top-20 -right-20"></div>
+                <div class="glass-card p-6 md:p-10 rounded-[2rem] relative overflow-hidden group">
+                    <div class="signal-wave red w-64 md:w-96 h-64 md:h-96 absolute -top-20 -right-20"></div>
                     <div class="absolute top-0 left-0 w-full h-1 bg-red-600 transition-all group-hover:h-2"></div>
-                    <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="flex justify-between items-start mb-6 md:mb-8 relative z-10">
                         <div>
-                            <h3 class="text-3xl font-bold font-tech">MagtiCom</h3>
+                            <h3 class="text-2xl md:text-3xl font-bold font-tech">MagtiCom</h3>
                             <p class="text-xs text-slate-500 uppercase tracking-widest mt-1">Market Leader</p>
                         </div>
                         <div class="p-3 bg-white/5 rounded-full"><i data-lucide="signal"></i></div>
@@ -337,12 +370,12 @@
                 </div>
 
                 <!-- Silknet -->
-                <div class="glass-card p-10 rounded-[2rem] relative overflow-hidden group">
-                    <div class="signal-wave green w-96 h-96 absolute -bottom-20 -left-20" style="animation-delay: 1.5s"></div>
+                <div class="glass-card p-6 md:p-10 rounded-[2rem] relative overflow-hidden group">
+                    <div class="signal-wave green w-64 md:w-96 h-64 md:h-96 absolute -bottom-20 -left-20" style="animation-delay: 1.5s"></div>
                     <div class="absolute top-0 left-0 w-full h-1 bg-green-500 transition-all group-hover:h-2"></div>
-                    <div class="flex justify-between items-start mb-8 relative z-10">
+                    <div class="flex justify-between items-start mb-6 md:mb-8 relative z-10">
                         <div>
-                            <h3 class="text-3xl font-bold font-tech">Silknet</h3>
+                            <h3 class="text-2xl md:text-3xl font-bold font-tech">Silknet</h3>
                             <p class="text-xs text-slate-500 uppercase tracking-widest mt-1">The Bundler</p>
                         </div>
                         <div class="p-3 bg-white/5 rounded-full"><i data-lucide="layers"></i></div>
@@ -362,20 +395,18 @@
         </div>
     </section>
 
-    <!-- 3. Product Portfolio: Floating Cubes -->
-    <section id="portfolio" class="py-24 px-6 relative overflow-hidden">
-        <div class="cube-float left-10 top-20 text-cyan-500"><i data-lucide="box" class="w-12 h-12"></i></div>
-        <div class="cube-float right-20 top-40 text-blue-500" style="animation-delay: 2s"><i data-lucide="package" class="w-8 h-8"></i></div>
-        <div class="cube-float left-1/3 bottom-20 text-indigo-500" style="animation-delay: 4s"><i data-lucide="database" class="w-10 h-10"></i></div>
+    <!-- 3. Product Portfolio -->
+    <section id="portfolio" class="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden">
+        <div class="cube-float left-10 top-20 text-cyan-500"><i data-lucide="box" class="w-8 md:w-12 h-8 md:h-12"></i></div>
+        <div class="cube-float right-20 top-40 text-blue-500" style="animation-delay: 2s"><i data-lucide="package" class="w-6 md:w-8 h-6 md:h-8"></i></div>
+        <div class="cube-float left-1/3 bottom-20 text-indigo-500" style="animation-delay: 4s"><i data-lucide="database" class="w-8 md:w-10 h-8 md:h-10"></i></div>
 
         <div class="max-w-7xl mx-auto relative z-10">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-8">3. Product <span class="text-gradient">Portfolio</span></h2>
-            <p class="text-center text-slate-400 mb-16 max-w-2xl mx-auto">Current portfolio is price-based with little differentiation. We need to bridge the gap.</p>
+            <h2 class="text-3xl md:text-5xl font-bold text-center mb-8">3. Product <span class="text-gradient">Portfolio</span></h2>
+            <p class="text-center text-slate-400 mb-12 md:mb-16 max-w-2xl mx-auto text-sm md:text-base">Current portfolio is price-based with little differentiation. We need to bridge the gap.</p>
 
-            <div class="grid md:grid-cols-3 gap-6 h-[400px]">
-                
-                <!-- Current Portfolio -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto">
+                <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col justify-between">
                     <div>
                         <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6">
                             <i data-lucide="box"></i>
@@ -387,16 +418,15 @@
                             <li class="flex items-center gap-2 text-sm text-slate-300"><i data-lucide="check" class="w-4 h-4 text-blue-500"></i> Basic Bundles</li>
                         </ul>
                     </div>
-                    <div class="mt-4 text-xs text-slate-500 font-bold uppercase tracking-wide">Status: Standard</div>
+                    <div class="mt-6 md:mt-4 text-xs text-slate-500 font-bold uppercase tracking-wide">Status: Standard</div>
                 </div>
 
-                <!-- The Gap (Flip Card) -->
-                <div class="flip-card group cursor-pointer">
+                <div class="flip-card group cursor-pointer w-full">
                     <div class="flip-card-inner">
                         <div class="flip-card-front glass-card bg-red-900/10 border-red-500/30 flex flex-col justify-center items-center text-center">
                             <i data-lucide="alert-triangle" class="w-16 h-16 text-red-500 mb-4 animate-pulse"></i>
                             <h3 class="text-2xl font-bold text-white mb-2">The Gap</h3>
-                            <p class="text-sm text-slate-400">Hover to see Analysis</p>
+                            <p class="text-sm text-slate-400">Tap to see Analysis</p>
                         </div>
                         <div class="flip-card-back flex flex-col justify-center">
                             <h3 class="text-xl font-bold text-red-400 mb-4">Critical Issues</h3>
@@ -410,8 +440,7 @@
                     </div>
                 </div>
 
-                <!-- Improvements -->
-                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between border-cyan-500/30">
+                <div class="glass-card p-6 md:p-8 rounded-2xl flex flex-col justify-between border-cyan-500/30">
                     <div>
                         <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6">
                             <i data-lucide="zap"></i>
@@ -423,47 +452,43 @@
                             <li class="flex items-center gap-2 text-sm text-slate-300"><i data-lucide="arrow-right" class="w-4 h-4 text-cyan-500"></i> Value-Added (Cloud/Security)</li>
                         </ul>
                     </div>
-                    <div class="mt-4 text-xs text-cyan-500 font-bold uppercase tracking-wide">Status: Opportunity</div>
+                    <div class="mt-6 md:mt-4 text-xs text-cyan-500 font-bold uppercase tracking-wide">Status: Opportunity</div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Part 4: Strategic Pivot (Interactive) -->
-    <section id="strategy" class="py-24 px-6 relative overflow-hidden bg-slate-950/80">
+    <!-- Part 4: Strategic Pivot -->
+    <section id="strategy" class="py-16 md:py-24 px-4 md:px-6 relative overflow-hidden bg-slate-950/80">
         <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="text-center mb-12">
+            <div class="text-center mb-10 md:mb-12">
                 <span class="text-cyan-400 font-bold tracking-widest text-xs uppercase">Part 4: The Strategy</span>
-                <h2 class="text-5xl font-bold mt-2">The <span class="text-gradient">Lifestyle Pivot</span></h2>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2">The <span class="text-gradient">Lifestyle Pivot</span></h2>
             </div>
 
-            <!-- ANIMATED VISUALIZER (Red/Blue Ocean) -->
-            <div class="mb-16">
-                <div class="max-w-4xl mx-auto glass-card rounded-3xl p-6 relative overflow-hidden ocean-visualizer h-80" id="ocean-bg">
-                    <!-- Controls -->
-                    <div class="absolute top-6 left-6 z-20 bg-black/40 backdrop-blur rounded-full p-1 border border-white/10 flex">
-                        <button onclick="setOcean('red')" id="btn-red" class="px-4 py-2 rounded-full text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg">Current (Red Ocean)</button>
-                        <button onclick="setOcean('blue')" id="btn-blue" class="px-4 py-2 rounded-full text-xs font-bold uppercase transition-all text-slate-400 hover:text-white">Future (Partner)</button>
+            <div class="mb-10 md:mb-16">
+                <div class="max-w-4xl mx-auto glass-card rounded-3xl p-4 md:p-6 relative overflow-hidden ocean-visualizer h-64 md:h-80" id="ocean-bg">
+                    <div class="absolute top-4 md:top-6 left-4 md:left-6 z-20 bg-black/40 backdrop-blur rounded-full p-1 border border-white/10 flex">
+                        <button onclick="setOcean('red')" id="btn-red" class="px-3 md:px-4 py-1 md:py-2 rounded-full text-[10px] md:text-xs font-bold uppercase transition-all bg-red-600 text-white shadow-lg">Current</button>
+                        <button onclick="setOcean('blue')" id="btn-blue" class="px-3 md:px-4 py-1 md:py-2 rounded-full text-[10px] md:text-xs font-bold uppercase transition-all text-slate-400 hover:text-white">Future</button>
                     </div>
 
-                    <!-- Layers -->
-                    <div id="layer-red" class="absolute inset-0 bg-gradient-to-br from-red-900/60 to-slate-900 transition-opacity duration-1000 flex flex-col items-center justify-center">
-                        <div class="text-center">
-                            <i data-lucide="trending-down" class="w-24 h-24 text-red-500 mb-4 mx-auto animate-pulse"></i>
-                            <h3 class="text-3xl font-bold text-white mb-2">Price War Chaos</h3>
-                            <p class="text-red-200">Bleeding value. Fixed costs unsustainable.</p>
+                    <div id="layer-red" class="absolute inset-0 bg-gradient-to-br from-red-900/60 to-slate-900 transition-opacity duration-1000 flex flex-col items-center justify-center p-4">
+                        <div class="text-center mt-8 md:mt-0">
+                            <i data-lucide="trending-down" class="w-16 md:w-24 h-16 md:h-24 text-red-500 mb-2 md:mb-4 mx-auto animate-pulse"></i>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Price War Chaos</h3>
+                            <p class="text-sm md:text-base text-red-200">Bleeding value. Fixed costs unsustainable.</p>
                         </div>
                         <div class="particle red w-2 h-2 top-10 left-10"></div>
                         <div class="particle red w-3 h-3 top-20 right-20" style="animation-delay: 0.5s"></div>
                     </div>
 
-                    <div id="layer-blue" class="absolute inset-0 bg-gradient-to-br from-cyan-900/60 to-slate-900 transition-opacity duration-1000 opacity-0 flex flex-col items-center justify-center">
-                        <div class="text-center">
-                            <i data-lucide="shield-check" class="w-24 h-24 text-cyan-400 mb-4 mx-auto hover-glow"></i>
-                            <h3 class="text-3xl font-bold text-white mb-2">Indispensable Partner</h3>
-                            <p class="text-cyan-200">Stability. Trust. High Value.</p>
+                    <div id="layer-blue" class="absolute inset-0 bg-gradient-to-br from-cyan-900/60 to-slate-900 transition-opacity duration-1000 opacity-0 flex flex-col items-center justify-center p-4">
+                        <div class="text-center mt-8 md:mt-0">
+                            <i data-lucide="shield-check" class="w-16 md:w-24 h-16 md:h-24 text-cyan-400 mb-2 md:mb-4 mx-auto hover-glow"></i>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Indispensable Partner</h3>
+                            <p class="text-sm md:text-base text-cyan-200">Stability. Trust. High Value.</p>
                         </div>
                         <div class="particle blue w-4 h-4 top-10 left-20 opacity-30"></div>
                         <div class="particle blue w-6 h-6 bottom-10 right-20 opacity-30" style="animation-delay: 2s"></div>
@@ -471,105 +496,99 @@
                 </div>
             </div>
 
-            <!-- Tab Navigation -->
-            <div class="glass-card p-1 rounded-2xl mb-8 flex justify-center max-w-3xl mx-auto">
-                <button onclick="switchTab('onion')" id="tab-onion" class="flex-1 py-3 text-sm font-bold rounded-xl transition-all tab-active">The Onion</button>
-                <button onclick="switchTab('ansoff')" id="tab-ansoff" class="flex-1 py-3 text-sm font-bold rounded-xl transition-all text-slate-400 hover:text-white">Ansoff Matrix</button>
-                <button onclick="switchTab('mindset')" id="tab-mindset" class="flex-1 py-3 text-sm font-bold rounded-xl transition-all text-slate-400 hover:text-white">New Mindset</button>
+            <div class="glass-card p-1 rounded-2xl mb-8 flex justify-center max-w-3xl mx-auto overflow-hidden">
+                <button onclick="switchTab('onion')" id="tab-onion" class="flex-1 py-3 text-xs md:text-sm font-bold rounded-xl transition-all tab-active">The Onion</button>
+                <button onclick="switchTab('ansoff')" id="tab-ansoff" class="flex-1 py-3 text-xs md:text-sm font-bold rounded-xl transition-all text-slate-400 hover:text-white">Ansoff Matrix</button>
+                <button onclick="switchTab('mindset')" id="tab-mindset" class="flex-1 py-3 text-xs md:text-sm font-bold rounded-xl transition-all text-slate-400 hover:text-white">New Mindset</button>
             </div>
 
-            <!-- Tab Contents -->
-            <div class="glass-card p-8 md:p-12 rounded-[3rem] min-h-[500px] flex items-center">
-                
-                <!-- ONION (Interactive) -->
+            <div class="glass-card p-6 md:p-12 rounded-[2rem] md:rounded-[3rem] min-h-[400px] md:min-h-[500px] flex items-center">
                 <div id="content-onion" class="tab-content w-full">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <h3 class="text-3xl font-bold mb-6">Peeling the Onion</h3>
-                            <p class="text-slate-400 mb-8 leading-relaxed">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                        <div class="order-2 md:order-1">
+                            <h3 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Peeling the Onion</h3>
+                            <p class="text-slate-400 mb-6 md:mb-8 leading-relaxed text-sm md:text-base">
                                 To solve the problem, we must stop blaming competitors and look at our own role in the system. <br>
                                 <span class="text-cyan-400 text-xs uppercase font-bold tracking-widest">Click a layer to explore</span>
                             </p>
-                            <div class="relative h-48">
+                            <div class="relative h-48 md:h-48">
                                 <div id="text-layer-1" class="layer-text active">
                                     <div class="flex gap-4 items-start">
-                                        <div class="w-10 h-10 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center font-bold text-lg">1</div>
+                                        <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-red-500/20 text-red-500 flex items-center justify-center font-bold text-lg shrink-0">1</div>
                                         <div>
-                                            <h4 class="font-bold text-white text-xl">The Symptoms</h4>
-                                            <p class="text-sm text-red-200 font-bold uppercase tracking-wide mb-2">The Presenting Problem</p>
-                                            <p class="text-slate-400">Churn is high (28%). ARPU is down. <br><em>"The system isn't working."</em></p>
+                                            <h4 class="font-bold text-white text-lg md:text-xl">The Symptoms</h4>
+                                            <p class="text-xs md:text-sm text-red-200 font-bold uppercase tracking-wide mb-2">The Presenting Problem</p>
+                                            <p class="text-sm md:text-base text-slate-400">Churn is high (28%). ARPU is down. <br><em>"The system isn't working."</em></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="text-layer-2" class="layer-text">
                                     <div class="flex gap-4 items-start">
-                                        <div class="w-10 h-10 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center font-bold text-lg">2</div>
+                                        <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-orange-500/20 text-orange-500 flex items-center justify-center font-bold text-lg shrink-0">2</div>
                                         <div>
-                                            <h4 class="font-bold text-white text-xl">The Blame</h4>
-                                            <p class="text-sm text-orange-200 font-bold uppercase tracking-wide mb-2">Others' Contribution</p>
-                                            <p class="text-slate-400">"Magti has better coverage." <br><em>It's easy to blame the market.</em></p>
+                                            <h4 class="font-bold text-white text-lg md:text-xl">The Blame</h4>
+                                            <p class="text-xs md:text-sm text-orange-200 font-bold uppercase tracking-wide mb-2">Others' Contribution</p>
+                                            <p class="text-sm md:text-base text-slate-400">"Magti has better coverage." <br><em>It's easy to blame the market.</em></p>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="text-layer-3" class="layer-text">
                                     <div class="flex gap-4 items-start">
-                                        <div class="w-10 h-10 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg">3</div>
+                                        <div class="w-8 md:w-10 h-8 md:h-10 rounded-full bg-cyan-500 text-black flex items-center justify-center font-bold text-lg shrink-0">3</div>
                                         <div>
-                                            <h4 class="font-bold text-cyan-400 text-xl">The Core</h4>
-                                            <p class="text-sm text-cyan-200 font-bold uppercase tracking-wide mb-2">Our Role</p>
-                                            <p class="text-white">We focused on selling plans, not building relationships.</p>
+                                            <h4 class="font-bold text-cyan-400 text-lg md:text-xl">The Core</h4>
+                                            <p class="text-xs md:text-sm text-cyan-200 font-bold uppercase tracking-wide mb-2">Our Role</p>
+                                            <p class="text-sm md:text-base text-white">We focused on selling plans, not building relationships.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex justify-center">
-                            <svg width="320" height="320" viewBox="0 0 320 320" class="group">
+                        <div class="flex justify-center order-1 md:order-2 mb-6 md:mb-0">
+                            <svg width="280" height="280" viewBox="0 0 320 320" class="group w-full max-w-[280px] md:max-w-[320px]">
                                 <circle cx="160" cy="160" r="140" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-width="1" class="onion-layer active" onclick="activateLayer(1)" id="circle-layer-1" />
-                                <text x="160" y="40" text-anchor="middle" fill="#ef4444" font-size="10" font-weight="bold" pointer-events="none">SYMPTOMS</text>
+                                <text x="160" y="40" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="bold" pointer-events="none">SYMPTOMS</text>
                                 
                                 <circle cx="160" cy="160" r="100" fill="#f97316" fill-opacity="0.2" stroke="#f97316" stroke-width="1" class="onion-layer" onclick="activateLayer(2)" id="circle-layer-2" />
-                                <text x="160" y="80" text-anchor="middle" fill="#f97316" font-size="10" font-weight="bold" pointer-events="none">BLAME</text>
+                                <text x="160" y="80" text-anchor="middle" fill="#f97316" font-size="12" font-weight="bold" pointer-events="none">BLAME</text>
                                 
                                 <circle cx="160" cy="160" r="60" fill="#06b6d4" fill-opacity="0.3" stroke="#06b6d4" stroke-width="1" class="onion-layer" onclick="activateLayer(3)" id="circle-layer-3" />
-                                <text x="160" y="165" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold" pointer-events="none">CORE</text>
+                                <text x="160" y="165" text-anchor="middle" fill="#fff" font-size="14" font-weight="bold" pointer-events="none">CORE</text>
                             </svg>
                         </div>
                     </div>
                 </div>
 
-                <!-- ANSOFF -->
                 <div id="content-ansoff" class="tab-content w-full hidden">
                     <div class="text-center max-w-2xl mx-auto mb-12">
-                        <h3 class="text-3xl font-bold mb-4">The Ansoff Pivot</h3>
-                        <p class="text-slate-400">Move from "Market Penetration" to "Product Development".</p>
+                        <h3 class="text-2xl md:text-3xl font-bold mb-4">The Ansoff Pivot</h3>
+                        <p class="text-slate-400 text-sm md:text-base">Move from "Market Penetration" to "Product Development".</p>
                     </div>
-                    <div class="grid grid-cols-2 gap-6 max-w-3xl mx-auto">
-                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 grayscale opacity-50">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-3xl mx-auto">
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 grayscale opacity-50 text-center">
                             <h4 class="font-bold text-slate-400 mb-2">Market Penetration</h4>
                             <p class="text-xs text-slate-500">Fighting for price. A losing battle.</p>
                         </div>
-                        <div class="p-6 rounded-2xl bg-cyan-900/20 border border-cyan-400 transform scale-105 shadow-[0_0_30px_rgba(6,182,212,0.2)]">
+                        <div class="p-6 rounded-2xl bg-cyan-900/20 border border-cyan-400 transform scale-100 md:scale-105 shadow-[0_0_30px_rgba(6,182,212,0.2)] text-center">
                             <h4 class="font-bold text-cyan-400 mb-2">Product Development</h4>
                             <p class="text-xs text-cyan-100">"Business Continuity" Bundles for Remote Workers.</p>
                         </div>
-                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 opacity-30"><h4 class="font-bold text-slate-500">Market Development</h4></div>
-                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 opacity-30"><h4 class="font-bold text-slate-500">Diversification</h4></div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 opacity-30 text-center"><h4 class="font-bold text-slate-500">Market Development</h4></div>
+                        <div class="p-6 rounded-2xl bg-white/5 border border-white/10 opacity-30 text-center"><h4 class="font-bold text-slate-500">Diversification</h4></div>
                     </div>
                 </div>
 
-                <!-- MINDSET -->
                 <div id="content-mindset" class="tab-content w-full hidden">
-                    <div class="grid md:grid-cols-2 gap-12">
-                        <div class="p-8 rounded-3xl bg-red-900/10 border border-red-900/30">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+                        <div class="p-6 md:p-8 rounded-3xl bg-red-900/10 border border-red-900/30">
                             <h4 class="text-xl font-bold text-red-400 mb-6">OLD: Deficit Mindset</h4>
                             <ul class="space-y-4 text-slate-400">
                                 <li class="flex items-center gap-3"><i data-lucide="x-circle" class="text-red-500 w-5"></i> Focus on complaints</li>
                                 <li class="flex items-center gap-3"><i data-lucide="x-circle" class="text-red-500 w-5"></i> Metric: New Signups</li>
                             </ul>
                         </div>
-                        <div class="p-8 rounded-3xl bg-green-900/10 border border-green-500/30">
+                        <div class="p-6 md:p-8 rounded-3xl bg-green-900/10 border border-green-500/30">
                             <h4 class="text-xl font-bold text-green-400 mb-6">NEW: Capacity Mindset</h4>
                             <ul class="space-y-4 text-slate-200">
                                 <li class="flex items-center gap-3"><i data-lucide="check-circle" class="text-green-500 w-5"></i> <strong>Positive Deviance:</strong> Why do 72% stay?</li>
@@ -582,103 +601,96 @@
         </div>
     </section>
 
-    <!-- Part 5: Implementation (Engagement vs Installation) -->
-    <section id="implementation" class="py-24 px-6 relative">
+    <!-- Part 5: Implementation -->
+    <section id="implementation" class="py-16 md:py-24 px-4 md:px-6 relative">
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row gap-12 mb-16 items-center">
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Real <span class="text-gradient">Engagement</span>,<br> Not Just a Rollout</h2>
-                    <p class="text-slate-400 text-lg leading-relaxed">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 mb-12 md:mb-16 items-center">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6">Real <span class="text-gradient">Engagement</span>,<br> Not Just a Rollout</h2>
+                    <p class="text-slate-400 text-base md:text-lg leading-relaxed">
                         Any new strategy will fail if it’s just a memo sent from the top floor. 
                         We must move from "Installation" to true "Engagement."
                     </p>
                 </div>
-                <div class="md:w-1/2">
-                    <div class="glass-card p-6 rounded-2xl border-l-4 border-red-500 mb-4 opacity-60">
-                        <h4 class="font-bold text-red-400">The Trap of "Installation"</h4>
-                        <p class="text-sm text-slate-500">Announcing a "Premium Plan" via email. Top-down mandates. Ignoring staff reality.</p>
+                <div class="md:w-1/2 w-full">
+                    <div class="glass-card p-4 md:p-6 rounded-2xl border-l-4 border-red-500 mb-4 opacity-60">
+                        <h4 class="font-bold text-red-400 text-sm md:text-base">The Trap of "Installation"</h4>
+                        <p class="text-xs md:text-sm text-slate-500">Announcing a "Premium Plan" via email. Top-down mandates.</p>
                     </div>
-                    <div class="glass-card p-6 rounded-2xl border-l-4 border-green-500 transform scale-105 shadow-xl">
-                        <h4 class="font-bold text-green-400">The Power of "Engagement"</h4>
-                        <p class="text-sm text-slate-300">Involving front-line staff in Discovery. Giving them a choice. Building belief.</p>
+                    <div class="glass-card p-4 md:p-6 rounded-2xl border-l-4 border-green-500 transform scale-100 md:scale-105 shadow-xl">
+                        <h4 class="font-bold text-green-400 text-sm md:text-base">The Power of "Engagement"</h4>
+                        <p class="text-xs md:text-sm text-slate-300">Involving front-line staff in Discovery. Giving them a choice.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Step 1 -->
-                <div class="glass-card p-8 rounded-3xl hover-glow group">
-                    <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="glass-card p-6 md:p-8 rounded-3xl hover-glow group">
+                    <div class="w-10 md:w-12 h-10 md:h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="search"></i>
                     </div>
-                    <h3 class="text-xl font-bold font-tech mb-3">Front-Line Discovery</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Involve technicians and call center staff. They know what a "premium experience" actually looks like because they hear the complaints every day.
+                    <h3 class="text-lg md:text-xl font-bold font-tech mb-3">Front-Line Discovery</h3>
+                    <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
+                        Involve technicians and call center staff. They know what a "premium experience" actually looks like.
                     </p>
                 </div>
-                <!-- Step 2 -->
-                <div class="glass-card p-8 rounded-3xl hover-glow group">
-                    <div class="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 mb-6 group-hover:scale-110 transition-transform">
+                <div class="glass-card p-6 md:p-8 rounded-3xl hover-glow group">
+                    <div class="w-10 md:w-12 h-10 md:h-12 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-400 mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="shield-alert"></i>
                     </div>
-                    <h3 class="text-xl font-bold font-tech mb-3">Addressing Resistance</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        The sales team is terrified of losing customers without discounts. We must address this fear directly and prove the sustainability of high-margin plans.
+                    <h3 class="text-lg md:text-xl font-bold font-tech mb-3">Addressing Resistance</h3>
+                    <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
+                        The sales team is terrified of losing customers without discounts. We must address this fear directly.
                     </p>
                 </div>
-                <!-- Step 3 -->
-                <div class="glass-card p-8 rounded-3xl hover-glow group">
-                    <div class="w-12 h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
+                <div class="glass-card p-6 md:p-8 rounded-3xl hover-glow group">
+                    <div class="w-10 md:w-12 h-10 md:h-12 rounded-full bg-cyan-500/20 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform">
                         <i data-lucide="users"></i>
                     </div>
-                    <h3 class="text-xl font-bold font-tech mb-3">Action Meetings</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">
-                        Replace "rollout memos" with internal Action Meetings. Give staff the power of choice in how they deliver this new value.
+                    <h3 class="text-lg md:text-xl font-bold font-tech mb-3">Action Meetings</h3>
+                    <p class="text-xs md:text-sm text-slate-400 leading-relaxed">
+                        Replace "rollout memos" with internal Action Meetings. Give staff the power of choice.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Part 6: Technology (Human Touch) -->
-    <section id="tech" class="py-24 px-6 bg-slate-950/50 relative overflow-hidden">
+    <!-- Part 6: Technology -->
+    <section id="tech" class="py-16 md:py-24 px-4 md:px-6 bg-slate-950/50 relative overflow-hidden">
         <div class="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-blue-900/10 to-transparent"></div>
-        
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-bold">Technology with a <span class="text-gradient">Human Touch</span></h2>
-                <p class="text-slate-400 mt-4 max-w-2xl mx-auto">Silknet wins on mass bundles, but they feel like a faceless utility. This is our opening.</p>
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-5xl font-bold">Technology with a <span class="text-gradient">Human Touch</span></h2>
+                <p class="text-slate-400 mt-4 max-w-2xl mx-auto text-sm md:text-base">Silknet wins on mass bundles, but they feel like a faceless utility. This is our opening.</p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <!-- Left: The Myth -->
-                <div class="text-right space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                <div class="text-center md:text-right space-y-8">
                     <div>
-                        <h3 class="text-2xl font-bold text-slate-300">The Myth of Convenience</h3>
-                        <p class="text-slate-500 mt-2">
-                            Technology is great for efficiency, but it sucks at building trust. Automated loops ("Press 1 for Sales") alienate high-value clients.
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-300">The Myth of Convenience</h3>
+                        <p class="text-sm md:text-base text-slate-500 mt-2">
+                            Technology is great for efficiency, but it sucks at building trust. Automated loops alienate high-value clients.
                         </p>
                     </div>
                     <div>
-                        <h3 class="text-2xl font-bold text-slate-300">The "Average" Market</h3>
-                        <p class="text-slate-500 mt-2">
+                        <h3 class="text-xl md:text-2xl font-bold text-slate-300">The "Average" Market</h3>
+                        <p class="text-sm md:text-base text-slate-500 mt-2">
                             In a market that feels increasingly transactional and average, pure efficiency is no longer a differentiator.
                         </p>
                     </div>
                 </div>
 
-                <!-- Center: Visual Divider -->
                 <div class="hidden md:flex justify-center items-center">
                     <div class="w-px h-64 bg-gradient-to-b from-transparent via-cyan-500 to-transparent"></div>
                 </div>
 
-                <!-- Right: The Solution -->
                 <div class="space-y-8">
                     <div class="glass-card p-6 rounded-2xl border-l-4 border-cyan-500">
-                        <h3 class="text-2xl font-bold text-white flex items-center gap-3">
+                        <h3 class="text-xl md:text-2xl font-bold text-white flex items-center justify-center md:justify-start gap-3">
                             <i data-lucide="heart-handshake" class="text-cyan-400"></i> Human-Centered Service
                         </h3>
-                        <p class="text-slate-400 mt-2">
+                        <p class="text-sm md:text-base text-slate-400 mt-2 text-center md:text-left">
                             Imagine a customer calling in and actually reaching a person who knows their name. That presence is our powerful differentiator.
                         </p>
                     </div>
@@ -687,46 +699,45 @@
         </div>
     </section>
 
-    <!-- Part 7: The Shift (Summary) -->
-    <section class="py-24 px-6">
+    <!-- Part 7: The Shift -->
+    <section class="py-16 md:py-24 px-4 md:px-6">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-12">Quick Summary: <span class="text-gradient">The Shift</span></h2>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-12">Quick Summary: <span class="text-gradient">The Shift</span></h2>
             
-            <div class="glass-card rounded-3xl overflow-hidden">
-                <div class="grid grid-cols-3 bg-white/5 border-b border-white/10 p-4 font-bold text-xs uppercase tracking-widest text-slate-400">
-                    <div>Feature</div>
-                    <div>The Old Way <span class="text-red-500">(Fighting for scraps)</span></div>
-                    <div class="text-cyan-400">The New Way <span class="text-cyan-600">(Building a niche)</span></div>
-                </div>
-                <!-- Rows -->
-                <div class="grid grid-cols-3 border-b border-white/5 p-6 hover:bg-white/5 transition-colors">
-                    <div class="font-bold text-white">Value Prop</div>
-                    <div class="text-slate-500">"We’re the cheapest."</div>
-                    <div class="text-cyan-300 font-bold">"We’re the most reliable partner."</div>
-                </div>
-                <div class="grid grid-cols-3 border-b border-white/5 p-6 hover:bg-white/5 transition-colors">
-                    <div class="font-bold text-white">Market Focus</div>
-                    <div class="text-slate-500">Everyone (Mass market).</div>
-                    <div class="text-cyan-300 font-bold">High-value niches (B2B, Remote).</div>
-                </div>
-                <div class="grid grid-cols-3 border-b border-white/5 p-6 hover:bg-white/5 transition-colors">
-                    <div class="font-bold text-white">Mindset</div>
-                    <div class="text-slate-500">Fixing Deficits.</div>
-                    <div class="text-cyan-300 font-bold">Building Capacities.</div>
-                </div>
-                <div class="grid grid-cols-3 p-6 hover:bg-white/5 transition-colors">
-                    <div class="font-bold text-white">Success Metric</div>
-                    <div class="text-slate-500">New Acquisitions.</div>
-                    <div class="text-cyan-300 font-bold">Lifetime Value (LTV).</div>
+            <div class="glass-card rounded-3xl overflow-hidden overflow-x-auto">
+                <div class="min-w-[600px]">
+                    <div class="grid grid-cols-3 bg-white/5 border-b border-white/10 p-4 font-bold text-[10px] md:text-xs uppercase tracking-widest text-slate-400">
+                        <div>Feature</div>
+                        <div>The Old Way <span class="text-red-500 block md:inline">(Fighting for scraps)</span></div>
+                        <div class="text-cyan-400">The New Way <span class="text-cyan-600 block md:inline">(Building a niche)</span></div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-white/5 p-4 md:p-6 hover:bg-white/5 transition-colors text-sm md:text-base">
+                        <div class="font-bold text-white">Value Prop</div>
+                        <div class="text-slate-500">"We’re the cheapest."</div>
+                        <div class="text-cyan-300 font-bold">"We’re the most reliable partner."</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-white/5 p-4 md:p-6 hover:bg-white/5 transition-colors text-sm md:text-base">
+                        <div class="font-bold text-white">Market Focus</div>
+                        <div class="text-slate-500">Everyone (Mass market).</div>
+                        <div class="text-cyan-300 font-bold">High-value niches (B2B, Remote).</div>
+                    </div>
+                    <div class="grid grid-cols-3 border-b border-white/5 p-4 md:p-6 hover:bg-white/5 transition-colors text-sm md:text-base">
+                        <div class="font-bold text-white">Mindset</div>
+                        <div class="text-slate-500">Fixing Deficits.</div>
+                        <div class="text-cyan-300 font-bold">Building Capacities.</div>
+                    </div>
+                    <div class="grid grid-cols-3 p-4 md:p-6 hover:bg-white/5 transition-colors text-sm md:text-base">
+                        <div class="font-bold text-white">Success Metric</div>
+                        <div class="text-slate-500">New Acquisitions.</div>
+                        <div class="text-cyan-300 font-bold">Lifetime Value (LTV).</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Part 8: Thank You (Fireworks & Team) -->
+    <!-- Part 8: Thank You -->
     <footer class="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-black border-t border-cyan-900/50">
-        
-        <!-- Fireworks Container -->
         <div class="absolute inset-0 z-0">
             <div class="firework" style="top: 20%; left: 20%; animation-delay: 0s;"></div>
             <div class="firework" style="top: 30%; left: 80%; animation-delay: 0.5s;"></div>
@@ -734,18 +745,15 @@
             <div class="firework" style="top: 70%; left: 30%; animation-delay: 1.5s;"></div>
         </div>
 
-        <!-- Content -->
-        <div class="relative z-10 text-center">
-            <h1 class="text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-8 animate__animated animate__zoomIn">
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-5xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 mb-6 md:mb-8 animate__animated animate__zoomIn">
                 THANK YOU
             </h1>
-            <p class="text-slate-400 text-lg mb-16 uppercase tracking-[0.5em]">For Your Attention</p>
+            <p class="text-slate-400 text-sm md:text-lg mb-12 md:mb-16 uppercase tracking-[0.3em] md:tracking-[0.5em]">For Your Attention</p>
             
-            <!-- Animated Team Avatars -->
-            <div class="flex justify-center gap-8 md:gap-16">
-                <!-- Boy 1 -->
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
                 <div class="avatar-bounce flex flex-col items-center">
-                    <svg width="80" height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(6,182,212,0.8)]">
+                    <svg width="60" md:width="80" height="60" md:height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(6,182,212,0.8)] w-16 md:w-20 h-16 md:h-20">
                         <circle cx="50" cy="50" r="45" fill="#1e293b" stroke="#06b6d4" stroke-width="3"/>
                         <path d="M30 60 Q50 75 70 60" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
                         <circle cx="35" cy="45" r="5" fill="#fff"/>
@@ -754,9 +762,8 @@
                     </svg>
                     <span class="mt-4 font-bold text-cyan-400 text-sm">Saba</span>
                 </div>
-                <!-- Girl 1 -->
                 <div class="avatar-bounce flex flex-col items-center">
-                    <svg width="80" height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]">
+                    <svg width="60" md:width="80" height="60" md:height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(236,72,153,0.8)] w-16 md:w-20 h-16 md:h-20">
                         <circle cx="50" cy="50" r="45" fill="#1e293b" stroke="#ec4899" stroke-width="3"/>
                         <path d="M30 65 Q50 75 70 65" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
                         <circle cx="35" cy="45" r="5" fill="#fff"/>
@@ -765,9 +772,8 @@
                     </svg>
                     <span class="mt-4 font-bold text-pink-400 text-sm">Nino</span>
                 </div>
-                <!-- Boy 2 -->
                 <div class="avatar-bounce flex flex-col items-center">
-                    <svg width="80" height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(59,130,246,0.8)]">
+                    <svg width="60" md:width="80" height="60" md:height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(59,130,246,0.8)] w-16 md:w-20 h-16 md:h-20">
                         <circle cx="50" cy="50" r="45" fill="#1e293b" stroke="#3b82f6" stroke-width="3"/>
                         <path d="M35 60 Q50 70 65 60" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
                         <circle cx="35" cy="45" r="5" fill="#fff"/>
@@ -777,9 +783,8 @@
                     </svg>
                     <span class="mt-4 font-bold text-blue-400 text-sm">Nika</span>
                 </div>
-                <!-- Girl 2 -->
                 <div class="avatar-bounce flex flex-col items-center">
-                    <svg width="80" height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(168,85,247,0.8)]">
+                    <svg width="60" md:width="80" height="60" md:height="80" viewBox="0 0 100 100" class="drop-shadow-[0_0_15px_rgba(168,85,247,0.8)] w-16 md:w-20 h-16 md:h-20">
                         <circle cx="50" cy="50" r="45" fill="#1e293b" stroke="#a855f7" stroke-width="3"/>
                         <path d="M35 65 Q50 70 65 65" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
                         <circle cx="35" cy="45" r="5" fill="#fff"/>
@@ -790,6 +795,14 @@
                     <span class="mt-4 font-bold text-purple-400 text-sm">Elene</span>
                 </div>
             </div>
+        </div>
+
+        <div class="absolute bottom-6 w-full text-center z-20">
+            <a href="https://docs.google.com/document/d/1fu4OJuyjDSlpeITYyGXdkniAzG6xHIuUn-5vNyvjcf8/edit?usp=sharing" 
+               target="_blank" 
+               class="text-slate-600 text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] hover:text-cyan-400 transition-colors duration-300">
+                © Case-2 Document
+            </a>
         </div>
     </footer>
 
